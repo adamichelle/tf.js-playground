@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import Landing from '../views/Landing.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Landing',
+    component: Landing,
   },
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    meta: {
+      title: 'About',
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
 ];
@@ -20,6 +20,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const appName = 'tf.js Playground';
+  document.title = to.meta.title ? `${to.meta.title} - ${appName}` : appName;
+  next();
 });
 
 export default router;

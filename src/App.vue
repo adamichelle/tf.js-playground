@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link :to="{ name: 'Landing' }">Landing</router-link> |
+    <router-link :to="{ name: 'About' }">About</router-link>
   </div>
   <router-view/>
 </template>
@@ -12,7 +12,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0D0D0D;
+}
+
+a {
+  color: #041D26;
+  text-decoration: none;
 }
 
 #nav {
@@ -21,10 +26,9 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #F2A649;
 }
 </style>
