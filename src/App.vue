@@ -17,15 +17,19 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto Slab, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #0D0D0D;
 }
 
 a {
-  color: #041D26;
+  color: #F2A649;
   text-decoration: none;
+}
+
+a:hover {
+  color: #041D26;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -43,12 +47,35 @@ a {
 
 .tp-btn-amber {
   background-color: #F2A649;
-  color: #FFFFFF;
+  color: #0D0D0D;
+  font-weight: bold;
 }
 
 .tp-btn-amber:hover {
   background-color: initial;
   border-color: #F2A649;
   color: #F2A649;
+}
+
+.tp-divider {
+  color: #F7F3F0;
+}
+
+.tp-feather {
+  width: 60px;
+  height: 60px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.tp-amber {
+  color: #F2A649;
+}
+
+.tp-grey-green {
+  color: #041D26;
 }
 </style>
