@@ -1,17 +1,25 @@
 <template>
-  <div id="nav">
-    <router-link :to="{ name: 'Landing' }">Landing</router-link> |
-    <router-link :to="{ name: 'About' }">About</router-link>
-  </div>
-  <router-view/>
+  <the-navigation></the-navigation>
+  <main>
+    <router-view/>
+  </main>
 </template>
+
+<script>
+import TheNavigation from '@/components/TheNavigation.vue';
+
+export default {
+  components: {
+    TheNavigation,
+  },
+};
+</script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #0D0D0D;
 }
 
@@ -20,15 +28,27 @@ a {
   text-decoration: none;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
+.navbar-light .navbar-nav .nav-link {
   font-weight: bold;
+  color: inherit;
 }
 
-#nav a.router-link-exact-active {
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #F2B749;
+}
+
+.navbar .router-link-exact-active.nav-link {
+  color: #F2A649;
+}
+
+.tp-btn-amber {
+  background-color: #F2A649;
+  color: #FFFFFF;
+}
+
+.tp-btn-amber:hover {
+  background-color: initial;
+  border-color: #F2A649;
   color: #F2A649;
 }
 </style>
