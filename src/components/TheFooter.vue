@@ -35,6 +35,9 @@ export default {
     copyrightYear() {
       return (new Date()).getFullYear();
     },
+    onPlayground() {
+      return this.$route.path === '/playground';
+    },
   },
 };
 </script>
