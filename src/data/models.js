@@ -6,8 +6,9 @@ export default {
   models: [
     {
       name: 'Image Classification',
-      alias: '',
+      alias: 'mobilenet',
       url: 'https://github.com/tensorflow/tfjs-models/tree/master/mobilenet',
+      slug: 'mobilenet',
       description: 'Classify images with labels from the ImageNet database.',
       icon: 'image',
       htmlCode: imageClassification.html,
@@ -17,8 +18,9 @@ export default {
     },
     {
       name: 'Question and Answer',
-      alias: '',
+      alias: 'qna',
       url: 'https://github.com/tensorflow/tfjs-models/tree/master/qna',
+      slug: 'qna',
       description: 'Use a pre-trained BERT model from Tensorflow.js to answer questions based on the content of a given passage.',
       icon: 'align-justify',
       htmlCode: qna.html,
@@ -28,7 +30,8 @@ export default {
     },
     {
       name: 'Text Toxicity Detection',
-      alias: 'Toxicity',
+      alias: 'toxicity',
+      slug: 'toxicity',
       url: 'https://github.com/tensorflow/tfjs-models/tree/master/toxicity',
       description: 'Detect whether text contains toxic content such as threatening language, insults, obscenities, identity-based hate, or sexually explicit language.',
       icon: 'thumbs-down',
