@@ -22,7 +22,7 @@
       <router-link
         v-if="model.isAvailable"
         class="btn tp-btn-amber"
-        :to="{ name: 'Model', params: { modelSlug: model.slug }}"
+        :to="{ name: 'Playground', params: { modelSlug: model.slug }}"
       >
         Check it out
       </router-link>

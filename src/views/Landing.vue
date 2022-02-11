@@ -14,8 +14,8 @@
             </p>
             <router-link
               class="btn btn-lg tp-btn-amber"
-              :to="{ name: 'Playground' }"
-              v-if="!onPlayground">
+              :to="{ name: 'Models' }"
+            >
                 Try it now!
             </router-link>
           </div>
@@ -74,7 +74,9 @@
                   </svg>
                 </i>
                 <h5>Prefilled Examples</h5>
-                <p>Tweak the examples or clear it up and use the model alone!</p>
+                <p>
+                  Tweak the examples or clear it up and use the model alone! Sign up not required!
+                </p>
               </div>
             </div>
           </div>

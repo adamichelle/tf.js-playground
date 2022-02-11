@@ -11,8 +11,8 @@
           <div class="tp-footer__cta float-md-end">
             <router-link
               class="btn btn-md tp-btn-amber"
-              :to="{ name: 'Playground' }"
-              v-if="!onPlayground">
+              :to="{ name: 'Models' }"
+              v-if="showTryItOutButton">
               Get Started
             </router-link>
           </div>
@@ -35,8 +35,8 @@ export default {
     copyrightYear() {
       return (new Date()).getFullYear();
     },
-    onPlayground() {
-      return this.$route.path === '/playground';
+    showTryItOutButton() {
+      return this.$store.state.showTryItOutButton;
     },
   },
 };

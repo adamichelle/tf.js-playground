@@ -12,7 +12,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="toggleableNavItems">
-        <ul :class="[{ 'me-auto': !onPlayground }, 'navbar-nav ms-auto mb-2 mb-lg-0']">
+        <ul :class="[{ 'me-auto': showTryItOutButton }, 'navbar-nav ms-auto mb-2 mb-lg-0']">
           <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'About' }">About</router-link>
           </li>
@@ -26,8 +26,8 @@
       </div>
       <router-link
        class="btn tp-btn-amber"
-       :to="{ name: 'Playground' }"
-       v-if="!onPlayground">Try it out</router-link>
+       :to="{ name: 'Models' }"
+       v-if="showTryItOutButton">Try it out</router-link>
     </div>
   </nav>
 </template>
@@ -35,8 +35,8 @@
 <script>
 export default {
   computed: {
-    onPlayground() {
-      return this.$route.path === '/playground';
+    showTryItOutButton() {
+      return this.$store.state.showTryItOutButton;
     },
   },
 };

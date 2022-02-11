@@ -4,9 +4,14 @@ import data from '../data/models';
 export default createStore({
   state: {
     models: data.models,
-    onPlayground: false,
+    showTryItOutButton: true,
   },
   mutations: {
+    updateNavigationButtonVisibility(state, { buttonName, fullPath }) {
+      if (buttonName === 'try-it-out') {
+        state.showTryItOutButton = fullPath === '/';
+      }
+    },
   },
   actions: {
   },
