@@ -62,13 +62,18 @@ a:hover {
 }
 
 .tp-feather {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+}
+
+.tp-feather-lg {
+  width: 60px;
+  height: 60px;
 }
 
 .tp-amber {
