@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Landing from '../views/Landing.vue';
+import data from '../data/models';
 
 const routes = [
   {
@@ -31,6 +32,16 @@ const routes = [
     },
     component: () => import(/* webpackChunkName: "playground" */ '../views/Playground.vue'),
     props: true,
+    beforeEnter: (to, from, next) => {
+      const exists = data.models.find(
+        (model) => model.slug === to.params.modelSlug,
+      );
+      if (exists) {
+        next();
+      } else {
+        next({ name: 'NotFound' });
+      }
+    },
   },
   {
     path: '/demo',
@@ -39,6 +50,14 @@ const routes = [
       title: 'Demo',
     },
     component: () => import(/* webpackChunkName: "demo" */ '../views/Demo.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    meta: {
+      title: 'NotFound',
+    },
+    component: () => import(/* webpackChunkName: "not-found" */ '../views/NotFound.vue'),
   },
 ];
 
