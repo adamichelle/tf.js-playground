@@ -22,6 +22,16 @@ const routes = [
       title: 'Playground',
     },
     component: () => import(/* webpackChunkName: "playground" */ '../views/Playground.vue'),
+    children: [
+    ],
+  },
+  {
+    path: '/playground/:modelSlug',
+    name: 'Model',
+    meta: {
+      title: (route) => `Playground - ${route.params.modelSlug}`,
+    },
+    component: () => import(/* webpackChunkName: "model" */ '../views/Model.vue'),
   },
   {
     path: '/demo',
@@ -40,7 +50,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const appName = 'tf.js Playground';
-  document.title = to.meta.title ? `${to.meta.title} - ${appName}` : appName;
+
+  if (to.meta.title) {
+    const pageTitle = to.meta.title instanceof Function ? to.meta.title(to) : to.meta.title;
+    document.title = `${pageTitle} - ${appName}`;
+  } else {
+    document.title = appName;
+  }
   next();
 });
 

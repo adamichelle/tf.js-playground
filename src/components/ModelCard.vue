@@ -19,7 +19,13 @@
         </i> Learn More
       </a>
       </p>
-      <a v-if="model.isAvailable" href="#" class="btn tp-btn-amber">Check it out</a>
+      <router-link
+        v-if="model.isAvailable"
+        class="btn tp-btn-amber"
+        :to="{ name: 'Model', params: { modelSlug: model.slug }}"
+      >
+        Check it out
+      </router-link>
       <button v-else disabled="disabled" class="btn tp-btn-amber">Coming soon!</button>
     </div>
   </div>
