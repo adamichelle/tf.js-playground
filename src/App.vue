@@ -76,11 +76,20 @@ a:hover {
   height: 60px;
 }
 
+.tp-feather-sm {
+  width: 20px;
+  height: 20px;
+}
+
 .tp-amber {
   color: #F2A649;
 }
 
 .tp-grey-green {
   color: #041D26;
+}
+
+.tp-liliac {
+  color: #BABDBF;
 }
 </style>
