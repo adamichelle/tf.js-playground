@@ -2,6 +2,11 @@
   "name": "tf.js-playground",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Adaobi Aniuchi",
+    "email": "adamichelllle@gmail.com",
+    "url": "https://github.com/adamichelle"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -28,5 +33,6 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^7.0.0"
-  }
+  },
+  "license": "MIT"
 }
