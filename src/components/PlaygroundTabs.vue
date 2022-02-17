@@ -1,14 +1,14 @@
 <template>
   <div>
     <ul class="nav nav-tabs">
-      <li class="nav-item" v-for="(language, index) in editorLanguages" :key="index">
+      <li class="nav-item" v-for="(languageItem, index) in editorLanguages" :key="index">
         <a
-          :class="['nav-link', { active: currentTab === language.value }]"
+          :class="['nav-link', { active: currentLanguage === languageItem.value }]"
           aria-current="page"
           href="#"
-          @click="changeTab(language.value)"
+          @click="changeTab(languageItem.value)"
         >
-          {{ language.text }}
+          {{ languageItem.text }}
         </a>
       </li>
     </ul>
@@ -23,16 +23,20 @@ export default {
       type: Array,
       required: true,
     },
+    'current-language': {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {};
   },
   computed: {
-    currentTab() {
-      return this.$store.state.currentLanguage;
-    },
   },
   methods: {
     changeTab(selectedLanguage) {
-      if (selectedLanguage !== this.$store.state.currentLanguage) {
-        this.$store.commit('setCurrentLanguage', { language: selectedLanguage });
+      if (selectedLanguage !== this.currentLanguage) {
+        this.$emit('tabSelected', selectedLanguage);
       }
     },
   },

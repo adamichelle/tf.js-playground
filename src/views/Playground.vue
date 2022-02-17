@@ -13,10 +13,19 @@
       </h1>
     </div>
     <div class="tp-playground__body">
-      <div class="d-flex flex-row vh-100">
+      <div class="d-flex flex-row h-full">
         <div id="playground-editor" class="w-full">
-          <playground-tabs :editor-languages="editorLanguages"></playground-tabs>
-          <playground-editor :editor-value="editorValue"></playground-editor>
+          <div class="d-flex flex-column h-full">
+          <playground-tabs
+           :editor-languages="editorLanguages"
+           :current-language="currentLanguage"
+            @tabSelected="updateLanguage"
+          ></playground-tabs>
+
+          <playground-editor
+           :editor-language="currentLanguage"
+           :model="model"></playground-editor>
+          </div>
         </div>
         <iframe src="" frameborder="0" id="playground-preview" class="h-full w-full"></iframe>
       </div>
@@ -43,7 +52,11 @@ export default {
     },
   },
   created() {
-    this.$store.commit('setCurrentLanguage', { language: editorLanguages[0].value });
+    this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
+    this.$store.commit('setCurrentModelSlug', { language: this.modelSlug });
+  },
+  updated() {
+    this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
   },
   mounted() {
     Split(['#playground-editor', '#playground-preview']);
@@ -51,6 +64,9 @@ export default {
   data() {
     return {
       editorLanguages,
+      currentLanguage: editorLanguages[0].value,
+      editorValue: '',
+      editorLanguage: '',
     };
   },
   components: {
@@ -61,8 +77,10 @@ export default {
     model() {
       return this.$store.getters.getModelInfo(this.modelSlug);
     },
-    editorValue() {
-      return this.model[this.$store.state.currentLanguage];
+  },
+  methods: {
+    updateLanguage(language) {
+      this.currentLanguage = language;
     },
   },
 };
@@ -89,6 +107,7 @@ export default {
 
 <style scoped>
 .tp-playground__body {
+  height: 75vh;
   border-top: 2px solid #EEEEEE;
   box-shadow: 2px 2px 1px 1px rgba(232,232,232,0.5);
 }

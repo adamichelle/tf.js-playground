@@ -5823,6 +5823,18 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
+monaco-editor-webpack-plugin@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-5.0.0.tgz#796c50fb4ce3f75f45bf18dfa3c31f85dc9a05da"
+  integrity sha512-KrUUTmMO3lDCNK4honZ6rrrKjOI7FFLeyCktPetIo5HlRqr5dfE6ewaA9qNLH96XY7CekE3Z+v/+I6ufAs3ObA==
+  dependencies:
+    loader-utils "^2.0.0"
+
+monaco-editor@0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.29.0.tgz#916b7be58e882c3b2a4a2f444688b583919e085e"
+  integrity sha512-7bOTapOZG8gNfzk9HJstNClnRjD9TEkVqo7qB3W6y+4cypS31A55MBQ7dpnEdnQBU+Hz3isyx61mi3/e05S7Xg==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"

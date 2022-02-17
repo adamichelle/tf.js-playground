@@ -6,6 +6,8 @@ export default createStore({
     models: data.models,
     showTryItOutButton: true,
     currentLanguage: '',
+    currentEditorValue: '',
+    currentModelSlug: '',
   },
   mutations: {
     updateNavigationButtonVisibility(state, { buttonName, fullPath }) {
@@ -13,8 +15,14 @@ export default createStore({
         state.showTryItOutButton = fullPath === '/';
       }
     },
+    setCurrentModelSlug(state, { modelSlug }) {
+      state.currentModelSlug = modelSlug;
+    },
     setCurrentLanguage(state, { language }) {
       state.currentLanguage = language;
+    },
+    setCurrentEditorValue(state, { editorValue }) {
+      state.currentEditorValue = editorValue;
     },
   },
   actions: {
