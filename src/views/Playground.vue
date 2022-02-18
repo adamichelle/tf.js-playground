@@ -24,10 +24,17 @@
 
           <playground-editor
            :editor-language="currentLanguage"
-           :model="model"></playground-editor>
+           :model="model"
+           @triggerPreview="getPreview"></playground-editor>
           </div>
         </div>
-        <iframe src="" frameborder="0" id="playground-preview" class="h-full w-full"></iframe>
+        <iframe
+          ref="playgroundPreview"
+          sandbox="allow-scripts"
+          frameborder="0"
+          id="playground-preview"
+         class="h-full w-full">
+        </iframe>
       </div>
     </div>
   </div>
@@ -37,6 +44,7 @@
 import Split from 'split.js';
 import PlaygroundTabs from '@/components/PlaygroundTabs.vue';
 import PlaygroundEditor from '@/components/PlaygroundEditor.vue';
+import { generateHTML, convertAllHexCodesToRGB } from '../utils';
 
 const editorLanguages = [
   { text: 'HTML', value: 'html' },
@@ -52,6 +60,8 @@ export default {
     },
   },
   created() {
+    this.isCompliant = !!('srcdoc' in document.createElement('iframe'));
+    this.currentLanguage = this.$store.state.currentLanguage || editorLanguages[0].value;
     this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
     this.$store.commit('setCurrentModelSlug', { language: this.modelSlug });
   },
@@ -64,9 +74,10 @@ export default {
   data() {
     return {
       editorLanguages,
-      currentLanguage: editorLanguages[0].value,
+      currentLanguage: '',
       editorValue: '',
       editorLanguage: '',
+      isCompliant: false,
     };
   },
   components: {
@@ -77,10 +88,26 @@ export default {
     model() {
       return this.$store.getters.getModelInfo(this.modelSlug);
     },
+    isNotCompliant() {
+      if ('srcdoc' in document.createElement('iframe')) return false;
+
+      return this.iframeSrc;
+    },
   },
   methods: {
     updateLanguage(language) {
       this.currentLanguage = language;
+      this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
+    },
+    getPreview(payload) {
+      const generatedHTML = generateHTML(payload);
+      const checkedHTML = convertAllHexCodesToRGB(generatedHTML);
+
+      if (!this.isCompliant) {
+        this.$refs.playgroundPreview.src = `data:text/html;charset=utf-8,${checkedHTML}`;
+      } else {
+        this.$refs.playgroundPreview.srcdoc = generatedHTML;
+      }
     },
   },
 };

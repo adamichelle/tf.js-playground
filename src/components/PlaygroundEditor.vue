@@ -1,10 +1,26 @@
 <template>
-  <div ref="editor"></div>
+  <v-ace-editor
+    v-model:value="editorValue[editorLanguage]"
+    @init="editorInit"
+    :lang="editorLanguage"
+    theme="chrome"
+    :options="{ useWorker: true }"
+    style="height: 100%"
+    @change="debouncedChangeHandler" />
 </template>
 
 <script>
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import ace from 'ace-builds';
+import { VAceEditor } from 'vue3-ace-editor';
 import debounce from 'lodash.debounce';
+import { deepClone } from '../utils';
+
+const { version } = require('ace-builds');
+
+ace.config.set(
+  'basePath',
+  `https://cdn.jsdelivr.net/npm/ace-builds@${version}/src-noconflict/`,
+);
 
 export default {
   name: 'PlaygroundEditor',
@@ -18,68 +34,47 @@ export default {
       required: true,
     },
   },
+  components: {
+    VAceEditor,
+  },
   data() {
     return {
       editor: null,
-      editorState: {},
+      editorValue: {},
     };
   },
+  computed: {},
+  methods: {
+    editorInit(editor) {
+      this.editor = editor;
+      editor.setShowPrintMargin(false);
+    },
+  },
   created() {
-    this.$store.commit('setCurrentEditorValue', { language: this.model[this.editorLanguage] });
+    const editorValueFromStore = this.$store.state.currentEditorValue;
+    const originalEditorValue = JSON.stringify(editorValueFromStore)
+     !== '{}' ? deepClone(editorValueFromStore) : deepClone(this.model.code);
+
+    this.editorValue = JSON.stringify(editorValueFromStore) !== '{}' ? editorValueFromStore : this.model.code;
+    this.debouncedChangeHandler = debounce(() => {
+      if (this.editorValue[this.editorLanguage] !== originalEditorValue[this.editorLanguage]) {
+        this.$store.commit('setCurrentEditorValue', { editorValue: this.editorValue });
+        this.$emit('triggerPreview', this.editorValue);
+      }
+    }, 1000);
   },
   mounted() {
-    this.editor = monaco.editor.create(this.$refs.editor, {
-      language: this.editorLanguage,
-      automaticLayout: true,
-    });
-
-    this.editor.onDidChangeModelContent(
-      debounce(() => {
-        if (this.editorValue[this.editorLanguage] !== this.editor.getValue()) {
-          this.editorValue[this.editorLanguage] = this.editor.getValue();
-          this.$emit('editorValueChange', this.editorValue);
-        }
-      }, 500),
-    );
-
-    if (this.editorValue[this.editorLanguage]) {
-      this.editor.setValue(this.editorValue[this.editorLanguage]);
-      this.editor.restoreViewState(this.editorState[this.editorLanguage]);
-      this.$emit('editorValueChange', this.editorValue);
-    }
+    this.$emit('triggerPreview', this.editorValue);
   },
-  updated() {
+  beforeUnmount() {
+    this.debouncedChangeHandler.cancel();
   },
-  unmounted() {
-    this.editor.dispose();
-  },
-  computed: {
-    editorValue() {
-      return this.model.code;
-    },
-  },
-  methods: {},
-  watch: {
-    editorLanguage(currentEditorLanguage, previousEditorLanguage) {
-      monaco.editor.setModelLanguage(this.editor.getModel(), currentEditorLanguage);
-
-      this.editorState[previousEditorLanguage] = this.editor.saveViewState();
-
-      if (this.editorValue[currentEditorLanguage]) {
-        this.editor.setValue(this.editorValue[currentEditorLanguage]);
-      } else {
-        this.editor.setValue('');
-      }
-
-      if (this.editorState[currentEditorLanguage]) {
-        this.editor.restoreViewState(this.editorState[currentEditorLanguage]);
-        this.editor.focus();
-      }
-    },
-  },
+  watch: {},
 };
 </script>
 
-<style scoped>
-
+<style>
+.ace-chrome .ace_gutter {
+  background-color: transparent;
+}
 </style>

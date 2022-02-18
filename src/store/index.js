@@ -1,12 +1,15 @@
 import { createStore } from 'vuex';
 import data from '../data/models';
 
+const currentLanguage = localStorage.getItem('currentLanguage') || '';
+const currentEditorValue = JSON.parse(localStorage.getItem('currentEditorValue')) || {};
+
 export default createStore({
   state: {
     models: data.models,
     showTryItOutButton: true,
-    currentLanguage: '',
-    currentEditorValue: '',
+    currentLanguage: currentLanguage || '',
+    currentEditorValue: currentEditorValue || {},
     currentModelSlug: '',
   },
   mutations: {
@@ -20,9 +23,15 @@ export default createStore({
     },
     setCurrentLanguage(state, { language }) {
       state.currentLanguage = language;
+      if (localStorage) {
+        localStorage.setItem('currentLanguage', state.currentLanguage);
+      }
     },
     setCurrentEditorValue(state, { editorValue }) {
       state.currentEditorValue = editorValue;
+      if (localStorage) {
+        localStorage.setItem('currentEditorValue', JSON.stringify(editorValue));
+      }
     },
   },
   actions: {
