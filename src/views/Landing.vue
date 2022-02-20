@@ -14,8 +14,8 @@
             </p>
             <router-link
               class="btn btn-lg tp-btn-amber"
-              :to="{ name: 'Playground' }"
-              v-if="!onPlayground">
+              :to="{ name: 'Models' }"
+            >
                 Try it now!
             </router-link>
           </div>
@@ -35,7 +35,7 @@
             <div class="card">
               <div class="card-body text-center">
                 <i class="d-block mb-3 tp-grey-green">
-                  <svg class="tp-feather">
+                  <svg class="tp-feather tp-feather-lg">
                     <use href="../assets/feather-sprite.svg#tool"></use>
                   </svg>
                 </i>
@@ -53,7 +53,7 @@
             <div class="card">
               <div class="card-body text-center">
                 <i class="d-block mb-3 tp-amber">
-                  <svg class="tp-feather">
+                  <svg class="tp-feather tp-feather-lg">
                     <use href="../assets/feather-sprite.svg#zap"></use>
                   </svg>
                 </i>
@@ -69,12 +69,14 @@
             <div class="card">
               <div class="card-body text-center">
                 <i class="d-block mb-3 tp-grey-green">
-                  <svg class="tp-feather">
+                  <svg class="tp-feather tp-feather-lg">
                     <use href="../assets/feather-sprite.svg#codesandbox"></use>
                   </svg>
                 </i>
                 <h5>Prefilled Examples</h5>
-                <p>Tweak the examples or clear it up and use the model alone!</p>
+                <p>
+                  Tweak the examples or clear it up and use the model alone! Sign up not required!
+                </p>
               </div>
             </div>
           </div>

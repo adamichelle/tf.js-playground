@@ -62,13 +62,23 @@ a:hover {
 }
 
 .tp-feather {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+}
+
+.tp-feather-lg {
+  width: 60px;
+  height: 60px;
+}
+
+.tp-feather-sm {
+  width: 20px;
+  height: 20px;
 }
 
 .tp-amber {
@@ -77,5 +87,9 @@ a:hover {
 
 .tp-grey-green {
   color: #041D26;
+}
+
+.tp-liliac {
+  color: #BABDBF;
 }
 </style>
