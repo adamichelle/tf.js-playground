@@ -21,12 +21,13 @@ export const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
 export const generateHTML = (payload) => `<html>
   <head>
     <style id="_style">${payload.css}</style>
-    <script type="module" id="_script">
-      ${payload.javascript}
-    </script>
   </head>
   <body>
     ${payload.html}
+
+    <script type="module" id="_script">
+      ${payload.javascript}
+    </script>
   </body>
 </html>`;
 

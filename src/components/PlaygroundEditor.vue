@@ -41,6 +41,7 @@ export default {
     return {
       editor: null,
       editorValue: {},
+      isOriginalModelCode: false,
     };
   },
   computed: {},
@@ -51,20 +52,28 @@ export default {
     },
   },
   created() {
-    const editorValueFromStore = this.$store.state.currentEditorValue;
+    const playground = this.$store.getters.getPlayground;
+    const editorValueFromStore = playground ? playground.editorValue : {};
     const originalEditorValue = JSON.stringify(editorValueFromStore)
-     !== '{}' ? deepClone(editorValueFromStore) : deepClone(this.model.code);
+       !== '{}' ? deepClone(editorValueFromStore) : deepClone(this.model.code);
 
     this.editorValue = JSON.stringify(editorValueFromStore) !== '{}' ? editorValueFromStore : this.model.code;
+    this.isOriginalModelCode = JSON.stringify(editorValueFromStore) === '{}';
     this.debouncedChangeHandler = debounce(() => {
       if (this.editorValue[this.editorLanguage] !== originalEditorValue[this.editorLanguage]) {
-        this.$store.commit('setCurrentEditorValue', { editorValue: this.editorValue });
-        this.$emit('triggerPreview', this.editorValue);
+        this.isOriginalModelCode = false;
+        this.$emit('triggerPreview', {
+          editorValue: this.editorValue,
+          isOriginalModelCode: this.isOriginalModelCode,
+        });
       }
     }, 1000);
   },
   mounted() {
-    this.$emit('triggerPreview', this.editorValue);
+    this.$emit('triggerPreview', {
+      editorValue: this.editorValue,
+      isOriginalModelCode: this.isOriginalModelCode,
+    });
   },
   beforeUnmount() {
     this.debouncedChangeHandler.cancel();

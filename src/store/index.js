@@ -1,15 +1,23 @@
 import { createStore } from 'vuex';
 import data from '../data/models';
 
-const currentLanguage = localStorage.getItem('currentLanguage') || '';
-const currentEditorValue = JSON.parse(localStorage.getItem('currentEditorValue')) || {};
+const saveToLocalStorage = (key, item) => {
+  if (localStorage) {
+    const value = typeof item === 'string' || item instanceof String
+      ? item : JSON.stringify(item);
+    localStorage.setItem(key, value);
+  }
+};
+
+const getFromLocalStorage = (modelSlug) => {
+  const localStorageKey = `${modelSlug}Playground`;
+  return JSON.parse(localStorage.getItem(localStorageKey));
+};
 
 export default createStore({
   state: {
     models: data.models,
     showTryItOutButton: true,
-    currentLanguage: currentLanguage || '',
-    currentEditorValue: currentEditorValue || {},
     currentModelSlug: '',
   },
   mutations: {
@@ -21,16 +29,14 @@ export default createStore({
     setCurrentModelSlug(state, { modelSlug }) {
       state.currentModelSlug = modelSlug;
     },
-    setCurrentLanguage(state, { language }) {
-      state.currentLanguage = language;
-      if (localStorage) {
-        localStorage.setItem('currentLanguage', state.currentLanguage);
-      }
-    },
-    setCurrentEditorValue(state, { editorValue }) {
-      state.currentEditorValue = editorValue;
-      if (localStorage) {
-        localStorage.setItem('currentEditorValue', JSON.stringify(editorValue));
+    setCurrentPlaygroundValues(state, { modelSlug, language, editorValue }) {
+      const localStorageKey = `${modelSlug}Playground`;
+      switch (modelSlug) {
+        case 'toxicity':
+          saveToLocalStorage(localStorageKey, { language, editorValue });
+          break;
+        default:
+          break;
       }
     },
   },
@@ -42,5 +48,6 @@ export default createStore({
     getModelInfo: (state) => (modelSlug) => state.models.find(
       (model) => model.slug === modelSlug,
     ),
+    getPlayground: (state) => getFromLocalStorage(state.currentModelSlug),
   },
 });

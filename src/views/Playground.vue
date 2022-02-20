@@ -10,6 +10,11 @@
             </svg>
           </i>
         </a>
+        <i :title="model.description">
+          <svg class="tp-feather ms-2 tp-amber">
+            <use href="../assets/feather-sprite.svg#info"></use>
+          </svg>
+        </i>
       </h1>
     </div>
     <div class="tp-playground__body">
@@ -59,30 +64,34 @@ export default {
       required: true,
     },
   },
-  created() {
-    this.isCompliant = !!('srcdoc' in document.createElement('iframe'));
-    this.currentLanguage = this.$store.state.currentLanguage || editorLanguages[0].value;
-    this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
-    this.$store.commit('setCurrentModelSlug', { language: this.modelSlug });
-  },
-  updated() {
-    this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
-  },
-  mounted() {
-    Split(['#playground-editor', '#playground-preview']);
+  components: {
+    PlaygroundTabs,
+    PlaygroundEditor,
   },
   data() {
     return {
       editorLanguages,
       currentLanguage: '',
-      editorValue: '',
+      editorValue: {},
       editorLanguage: '',
       isCompliant: false,
     };
   },
-  components: {
-    PlaygroundTabs,
-    PlaygroundEditor,
+  created() {
+    this.isCompliant = !!('srcdoc' in document.createElement('iframe'));
+    this.$store.commit('setCurrentModelSlug', { modelSlug: this.modelSlug });
+    const playground = this.$store.getters.getPlayground;
+    this.currentLanguage = playground ? playground.language : editorLanguages[0].value;
+  },
+  updated() {
+    this.$store.commit('setCurrentPlaygroundValues', {
+      modelSlug: this.modelSlug,
+      language: this.currentLanguage,
+      editorValue: this.editorValue,
+    });
+  },
+  mounted() {
+    Split(['#playground-editor', '#playground-preview']);
   },
   computed: {
     model() {
@@ -97,10 +106,14 @@ export default {
   methods: {
     updateLanguage(language) {
       this.currentLanguage = language;
-      this.$store.commit('setCurrentLanguage', { language: this.currentLanguage });
+      this.$store.commit('setCurrentPlaygroundValues', {
+        modelSlug: this.modelSlug,
+        language: this.currentLanguage,
+        editorValue: this.editorValue,
+      });
     },
-    getPreview(payload) {
-      const generatedHTML = generateHTML(payload);
+    getPreview({ editorValue, isOriginalModelCode }) {
+      const generatedHTML = generateHTML(editorValue);
       const checkedHTML = convertAllHexCodesToRGB(generatedHTML);
 
       if (!this.isCompliant) {
@@ -108,6 +121,14 @@ export default {
       } else {
         this.$refs.playgroundPreview.srcdoc = generatedHTML;
       }
+
+      const editorValueToStore = isOriginalModelCode ? {} : editorValue;
+      this.editorValue = editorValueToStore;
+      this.$store.commit('setCurrentPlaygroundValues', {
+        modelSlug: this.modelSlug,
+        language: this.currentLanguage,
+        editorValue: editorValueToStore,
+      });
     },
   },
 };
