@@ -35,7 +35,7 @@
         </div>
         <iframe
           ref="playgroundPreview"
-          sandbox="allow-scripts"
+          sandbox="allow-scripts allow-forms"
           frameborder="0"
           id="playground-preview"
          class="h-full w-full">
