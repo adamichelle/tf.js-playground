@@ -31,13 +31,7 @@ export default createStore({
     },
     setCurrentPlaygroundValues(state, { modelSlug, language, editorValue }) {
       const localStorageKey = `${modelSlug}Playground`;
-      switch (modelSlug) {
-        case 'toxicity':
-          saveToLocalStorage(localStorageKey, { language, editorValue });
-          break;
-        default:
-          break;
-      }
+      saveToLocalStorage(localStorageKey, { language, editorValue });
     },
   },
   actions: {
