@@ -20,6 +20,7 @@ export const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
 
 export const generateHTML = (payload) => `<html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style id="_style">${payload.css}</style>
   </head>
   <body>
