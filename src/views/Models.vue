@@ -39,7 +39,7 @@
       </div>
     </section>
 
-    <section class="container tp-models-section pt-5">
+    <section class="container tp-models-section py-5">
       <div class="row">
         <div
           v-for="(model, index) in models"
