@@ -1,6 +1,7 @@
 import qna from './qna';
 import textToxicityDetection from './text-toxicity-detection';
 import imageClassification from './image-classification';
+import use from './use';
 
 export default {
   models: [
@@ -43,6 +44,20 @@ export default {
         html: textToxicityDetection.html,
         css: textToxicityDetection.css,
         javascript: textToxicityDetection.javascript,
+      },
+      isAvailable: true,
+    },
+    {
+      name: 'Universal Sentence Encoder for Question Answering',
+      alias: 'use qna',
+      slug: 'use-1',
+      url: 'https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder',
+      description: 'Encodes question and answer texts into 100-dimensional embeddings. The dot product of these embeddings measures how well the answer fits the question',
+      icon: 'file-text',
+      code: {
+        html: use.html,
+        css: use.css,
+        javascript: use.javascript,
       },
       isAvailable: true,
     },
