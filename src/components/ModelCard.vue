@@ -20,7 +20,7 @@
       </a>
       </p>
       <router-link
-        v-if="model.isAvailable"
+        v-if="model.isVisualized"
         class="btn tp-btn-amber"
         :to="{ name: 'Playground', params: { modelSlug: model.slug }}"
       >
