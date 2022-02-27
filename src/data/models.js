@@ -3,6 +3,7 @@ import textToxicityDetection from './text-toxicity-detection';
 import imageClassification from './image-classification';
 import use from './use';
 import visualizationPlaceholder from './visualization-placeholder';
+import speechCommands from './speech-commands';
 import { generateJSCodeForNonVisualizedModels } from '../utils';
 
 export default {
@@ -113,9 +114,9 @@ export default {
       description: 'Enables recognition of spoken commands comprised of simple isolated English words from a small vocabulary.',
       icon: 'mic',
       code: {
-        html: visualizationPlaceholder.html,
-        css: visualizationPlaceholder.css,
-        javascript: generateJSCodeForNonVisualizedModels('speech-commands'),
+        html: speechCommands.html,
+        css: speechCommands.css,
+        javascript: speechCommands.javascript,
       },
       isVisualized: true,
     },
