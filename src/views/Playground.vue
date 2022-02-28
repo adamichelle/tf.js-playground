@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="p-3 tp-playground__header">
-      <h1 class="fs-5 mb-0">
+      <h1 class="fs-5 mb-0 lh-base">
+        <router-link :to="{name : 'Models'}">
+          <i title="Go Back">
+            <svg class="tp-feather me-1 text-dark">
+              <use href="../assets/feather-sprite.svg#arrow-left-circle"></use>
+            </svg>
+          </i>
+        </router-link>
         {{model.name}}
         <a :href="model.url" target="__blank">
           <i>
@@ -35,7 +42,7 @@
         </div>
         <iframe
           ref="playgroundPreview"
-          sandbox="allow-scripts"
+          sandbox="allow-scripts allow-forms allow-same-origin"
           frameborder="0"
           id="playground-preview"
          class="h-full w-full">

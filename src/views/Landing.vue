@@ -109,7 +109,7 @@ export default {
   min-height: 400px;
   background-color: #F7F3F0;
   position: absolute;
-  top: -300px;
+  top: -60%;
   bottom: 0;
   width: 100%;
   z-index: -1;
@@ -147,7 +147,6 @@ export default {
 
   .tp-hero-background {
     min-height: 400px;
-    top: -100px;
   }
 }
 </style>

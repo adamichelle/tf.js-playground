@@ -1,5 +1,5 @@
 <template>
-  <div class="card tp-model-card pb-2" style="width: 22rem;">
+  <div class="card tp-model-card pb-2 mb-4">
     <div class="card-img-top text-center py-5">
       <i>
         <svg class="tp-feather tp-feather-lg">
@@ -9,7 +9,7 @@
     </div>
     <div class="card-body" :title="model.description">
       <h5 class="card-title">{{model.name}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{model.alias}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{model.alias}}</h6>
       <p class="card-text text-truncate">{{model.description}}</p>
       <p class="pt-0"><a :href="model.url" class="card-link">
         <i>
@@ -20,7 +20,7 @@
       </a>
       </p>
       <router-link
-        v-if="model.isAvailable"
+        v-if="model.isVisualized"
         class="btn tp-btn-amber"
         :to="{ name: 'Playground', params: { modelSlug: model.slug }}"
       >
@@ -46,5 +46,18 @@ export default {
   -webkit-box-shadow: 5px 6px 6px -6px #EBF4EF;
   -moz-box-shadow: 5px 6px 6px -6px #EBF4EF;
   box-shadow: 5px 6px 6px -6px #EBF4EF;
+  width: 22rem;
+}
+
+@media only screen and (min-width: 769px)  {
+  .tp-model-card {
+    width: 20rem;
+  }
+}
+
+@media only screen and (min-width: 912px)  {
+  .tp-model-card {
+    width: 22rem;
+  }
 }
 </style>
