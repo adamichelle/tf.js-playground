@@ -23,7 +23,7 @@ export default createStore({
   mutations: {
     updateNavigationButtonVisibility(state, { buttonName, fullPath }) {
       if (buttonName === 'try-it-out') {
-        state.showTryItOutButton = fullPath === '/';
+        state.showTryItOutButton = fullPath === '/' || fullPath === '/about' || fullPath === '/demo';
       }
     },
     setCurrentModelSlug(state, { modelSlug }) {
