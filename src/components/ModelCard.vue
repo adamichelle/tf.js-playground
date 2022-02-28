@@ -20,13 +20,11 @@
       </a>
       </p>
       <router-link
-        v-if="model.isVisualized"
         class="btn tp-btn-amber"
         :to="{ name: 'Playground', params: { modelSlug: model.slug }}"
       >
         Check it out
       </router-link>
-      <button v-else disabled="disabled" class="btn tp-btn-amber">Coming soon!</button>
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ export default {
 
 <style scoped>
 .tp-model-card {
-  min-height: 350px;
+  min-height: 400px;
   background-color: rgba(235, 244, 239, 0.2);
   border: 1px solid #EFF6F2;
   -webkit-box-shadow: 5px 6px 6px -6px #EBF4EF;

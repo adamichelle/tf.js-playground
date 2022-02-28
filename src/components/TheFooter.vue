@@ -22,7 +22,7 @@
       <hr class="tp-divider" />
 
       <div class="tp-footer__details text-center mt-4 mb-1">
-        <p>Made by Adaobi Aniuchi. &copy; {{copyrightYear}}</p>
+        <p>Made by <a href="https://github.com/adamichelle" target="__blank">Adaobi Aniuchi</a> - tf.js Playground {{copyrightYear}}</p>
       </div>
     </div>
   </footer>

@@ -22,10 +22,10 @@
       <div class="collapse navbar-collapse" id="toggleableNavItems">
         <ul :class="[{ 'me-auto': showTryItOutButton }, 'navbar-nav ms-auto mb-2 mb-lg-0']">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'About' }">About</router-link>
+            <router-link class="nav-link" :to="{ name: 'About' }" exact>About</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'Demo' }">Demo</router-link>
+            <router-link class="nav-link" :to="{ name: 'Demo' }" exact>Demo</router-link>
           </li>
           <li class="nav-item">
             <a target="__blank" class="nav-link" href="https://github.com/adamichelle/tf.js-playground">GitHub</a>
