@@ -1,8 +1,17 @@
 export default [
+  '/**',
+  '* Unlike the other playgrounds, this playground imports the necessary libraries in the HTML tab.',
+  '* I talk about it in the article where I discuss the making of this application',
+  '* You can read it here: ',
+  '* The speechCommands module will be available in the generated HTML.',
+  '* However, you might get some warnings with the code editor.',
+  '* It is safe to those warnings.',
+  '* You can store the recognizer created from speechCommands.create() in the `recognizer` variable ',
+  '*/',
+  '',
   '"use strict";',
   '',
   'let recognizer;',
-  '',
   '',
   '',
 ].join('\n');
