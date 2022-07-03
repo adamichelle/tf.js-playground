@@ -92,7 +92,7 @@
 import TheFooter from '@/components/TheFooter.vue';
 
 export default {
-  name: 'Landing',
+  name: 'LandingPage',
   components: {
     TheFooter,
   },

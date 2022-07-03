@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Landing from '../views/Landing.vue';
+import LandingPage from '../views/LandingPage.vue';
 import data from '../data/models';
 
 const routes = [
   {
     path: '/',
     name: 'Landing',
-    component: Landing,
+    component: LandingPage,
   },
   {
     path: '/about',
@@ -14,7 +14,7 @@ const routes = [
     meta: {
       title: 'About',
     },
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutPage.vue'),
   },
   {
     path: '/models',
@@ -22,7 +22,7 @@ const routes = [
     meta: {
       title: 'Models',
     },
-    component: () => import(/* webpackChunkName: "models" */ '../views/Models.vue'),
+    component: () => import(/* webpackChunkName: "models" */ '../views/ModelsPage.vue'),
   },
   {
     path: '/playground/:modelSlug',
@@ -30,7 +30,7 @@ const routes = [
     meta: {
       title: 'Playground',
     },
-    component: () => import(/* webpackChunkName: "playground" */ '../views/Playground.vue'),
+    component: () => import(/* webpackChunkName: "playground" */ '../views/PlaygroundPage.vue'),
     props: true,
     beforeEnter: (to, from, next) => {
       const exists = data.models.find(
@@ -49,7 +49,7 @@ const routes = [
     meta: {
       title: 'Demo',
     },
-    component: () => import(/* webpackChunkName: "demo" */ '../views/Demo.vue'),
+    component: () => import(/* webpackChunkName: "demo" */ '../views/DemoPage.vue'),
   },
   {
     path: '/:pathMatch(.*)*',
@@ -61,7 +61,7 @@ const routes = [
   },
 ];
 
-export default function ({ store }) {
+export default function routerFunction({ store }) {
   const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,

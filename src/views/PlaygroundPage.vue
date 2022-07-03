@@ -10,7 +10,7 @@
           </i>
         </router-link>
         {{model.name}}
-        <a :href="model.url" target="__blank">
+        <a :href="model.url" target="__blank" :aria-label="`${model.name} GitHub link`">
           <i>
             <svg class="tp-feather ms-1">
                 <use href="../assets/feather-sprite.svg#link"></use>
@@ -41,6 +41,7 @@
           </div>
         </div>
         <iframe
+          title="Playground Preview"
           ref="playgroundPreview"
           sandbox="allow-scripts allow-forms allow-same-origin"
           frameborder="0"

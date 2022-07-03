@@ -9,6 +9,7 @@
 
       <div class="embed-responsive embed-responsive-16by9">
         <iframe loading="lazy"
+          title="Demo"
           src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAE5tOdiXV8&#x2F;watch?embed"
           allowfullscreen="allowfullscreen" allow="fullscreen">
           </iframe>
@@ -23,6 +24,7 @@
 import TheFooter from '../components/TheFooter.vue';
 
 export default {
+  name: 'DemoPage',
   components: {
     TheFooter,
   },
